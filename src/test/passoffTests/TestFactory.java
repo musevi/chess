@@ -11,8 +11,7 @@ public class TestFactory {
     //Chess Functions
     //------------------------------------------------------------------------------------------------------------------
     public static ChessBoard getNewBoard(){
-        // FIXME
-		return null;
+		return new ChessBoardImpl();
     }
 
     public static ChessGame getNewGame(){
@@ -21,18 +20,29 @@ public class TestFactory {
     }
 
     public static ChessPiece getNewPiece(ChessGame.TeamColor pieceColor, ChessPiece.PieceType type){
-        // FIXME
+        switch (type) {
+            case KING:
+                break;
+            case QUEEN:
+                break;
+            case BISHOP:
+                break;
+            case KNIGHT:
+                break;
+            case ROOK:
+                break;
+            case PAWN:
+                return new Pawn(pieceColor, type);
+        }
 		return null;
     }
 
     public static ChessPosition getNewPosition(Integer row, Integer col){
-        // FIXME
-		return null;
+		return new ChessPositionImpl(col, row);
     }
 
     public static ChessMove getNewMove(ChessPosition startPosition, ChessPosition endPosition, ChessPiece.PieceType promotionPiece){
-        // FIXME
-		return null;
+		return new ChessMoveImpl(startPosition, endPosition, promotionPiece);
     }
     //------------------------------------------------------------------------------------------------------------------
 
