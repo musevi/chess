@@ -22,15 +22,15 @@ public class TestFactory {
     public static ChessPiece getNewPiece(ChessGame.TeamColor pieceColor, ChessPiece.PieceType type){
         switch (type) {
             case KING:
-                break;
+                return new King(pieceColor, type);
             case QUEEN:
-                break;
+                return new Queen(pieceColor, type);
             case BISHOP:
-                break;
+                return new Bishop(pieceColor, type);
             case KNIGHT:
-                break;
+                return new Knight(pieceColor, type);
             case ROOK:
-                break;
+                return new Rook(pieceColor, type);
             case PAWN:
                 return new Pawn(pieceColor, type);
         }
