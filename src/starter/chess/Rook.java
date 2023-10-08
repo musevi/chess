@@ -18,11 +18,11 @@ public class Rook extends ChessPieceImpl {
             ChessPositionImpl newPosition = new ChessPositionImpl(myPosition.getColumn(), i);
             if(board.getPiece(newPosition) != null) {
                 if(board.getPiece(newPosition).getTeamColor() != this.getTeamColor()){
-                    moves.add(new ChessMoveImpl(myPosition, new ChessPositionImpl(myPosition.getColumn(), i), null));
+                    moves.add(new ChessMoveImpl(myPosition, newPosition, null));
                 }
                 break;
             }
-            moves.add(new ChessMoveImpl(myPosition, new ChessPositionImpl(myPosition.getColumn(), i), null));
+            moves.add(new ChessMoveImpl(myPosition, newPosition, null));
         }
 
         //MOVE DOWN
@@ -30,11 +30,11 @@ public class Rook extends ChessPieceImpl {
             ChessPositionImpl newPosition = new ChessPositionImpl(myPosition.getColumn(), i);
             if(board.getPiece(newPosition) != null) {
                 if(board.getPiece(newPosition).getTeamColor() != this.getTeamColor()) {
-                    moves.add(new ChessMoveImpl(myPosition, new ChessPositionImpl(myPosition.getColumn(), i), null));
+                    moves.add(new ChessMoveImpl(myPosition, newPosition, null));
                 }
                 break;
             }
-            moves.add(new ChessMoveImpl(myPosition, new ChessPositionImpl(myPosition.getColumn(), i), null));
+            moves.add(new ChessMoveImpl(myPosition, newPosition, null));
         }
 
         //MOVE RIGHT
@@ -42,11 +42,11 @@ public class Rook extends ChessPieceImpl {
             ChessPositionImpl newPosition = new ChessPositionImpl(i, myPosition.getRow());
             if(board.getPiece(newPosition) != null) {
                 if(board.getPiece(newPosition).getTeamColor() != this.getTeamColor()) {
-                    moves.add(new ChessMoveImpl(myPosition, new ChessPositionImpl(i, myPosition.getRow()), null));
+                    moves.add(new ChessMoveImpl(myPosition, newPosition, null));
                 }
                 break;
             }
-            moves.add(new ChessMoveImpl(myPosition, new ChessPositionImpl(i, myPosition.getRow()), null));
+            moves.add(new ChessMoveImpl(myPosition, newPosition, null));
         }
 
         //MOVE LEFT
@@ -54,11 +54,11 @@ public class Rook extends ChessPieceImpl {
             ChessPositionImpl newPosition = new ChessPositionImpl(i, myPosition.getRow());
             if(board.getPiece(newPosition) != null) {
                 if(board.getPiece(newPosition).getTeamColor() != this.getTeamColor()) {
-                    moves.add(new ChessMoveImpl(myPosition, new ChessPositionImpl(i, myPosition.getRow()), null));
+                    moves.add(new ChessMoveImpl(myPosition, newPosition, null));
                 }
                 break;
             }
-            moves.add(new ChessMoveImpl(myPosition, new ChessPositionImpl(i, myPosition.getRow()), null));
+            moves.add(new ChessMoveImpl(myPosition, newPosition, null));
         }
         return moves;
     }

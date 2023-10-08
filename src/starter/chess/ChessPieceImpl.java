@@ -27,4 +27,20 @@ public class ChessPieceImpl implements ChessPiece {
     public Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition myPosition) {
         return null;
     }
+
+    @Override
+    public boolean isValidPosition(ChessPosition position, ChessBoard board) {
+        if(position.getColumn() > 8 || position.getColumn() < 1) {
+            return false;
+        }
+        if (position.getRow() > 8 || position.getRow() < 1) {
+            return false;
+        }
+        if(board.getPiece(position) != null) {
+            if(board.getPiece(position).getTeamColor() == this.getTeamColor()) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

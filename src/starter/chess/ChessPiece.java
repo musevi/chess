@@ -40,4 +40,6 @@ public interface ChessPiece {
      * @return Collection of valid moves
      */
     Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition myPosition);
+
+    boolean isValidPosition(ChessPosition position, ChessBoard board);
 }
