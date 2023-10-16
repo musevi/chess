@@ -97,6 +97,9 @@ public class Pawn extends ChessPieceImpl {
     }
 
     private boolean isValidCapture(ChessPosition myPosition, ChessBoard board) {
+        if(myPosition.getColumn() < 1 || myPosition.getColumn() > 8 || myPosition.getRow() < 1 || myPosition.getRow() > 8) {
+            return false;
+        }
         if(board.getPiece(myPosition) != null) {
             if(board.getPiece(myPosition).getTeamColor() != this.getTeamColor()) {
                 return true;

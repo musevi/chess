@@ -34,4 +34,12 @@ public class ChessPositionImpl implements ChessPosition {
     public int hashCode() {
         return Objects.hash(row, column);
     }
+
+    @Override
+    public String toString() {
+        return "ChessPositionImpl{" +
+                "row=" + row +
+                ", column=" + column +
+                '}';
+    }
 }

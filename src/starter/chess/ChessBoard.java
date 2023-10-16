@@ -30,4 +30,8 @@ public interface ChessBoard {
      * (How the game of chess normally starts)
      */
     void resetBoard();
+
+    ChessPosition findKing(ChessGame.TeamColor teamColor);
+
+    public ChessBoard copyBoard();
 }
