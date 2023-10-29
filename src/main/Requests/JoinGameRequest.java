@@ -16,11 +16,6 @@ public class JoinGameRequest {
     private String gameID;
 
     /**
-     * authToken for request;
-     */
-    private Models.AuthToken authToken;
-
-    /**
      * Constructor for JoinGameRequest
      *
      * @param playerColor   WHITE or BLACK

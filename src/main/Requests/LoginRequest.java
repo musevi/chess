@@ -17,11 +17,6 @@ public class LoginRequest {
     private String password;
 
     /**
-     * authToken for request;
-     */
-    private Models.AuthToken authToken;
-
-    /**
      * Constructor for LoginRequest
      *
      * @param username  set the username

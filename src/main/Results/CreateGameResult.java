@@ -13,27 +13,32 @@ public class CreateGameResult {
     /**
      * game ID string
      */
-    private String gameID;
+    private Integer gameID;
 
     /**
      * message string
      */
     private String message;
 
+    public CreateGameResult(String message) {
+        this.message = message;
+        gameID = null;
+    }
+
     /**
      * Constructor for CreateGameResult
      *
-     * @param gameName  new game name
      * @param gameID    new game ID
-     * @param message   message for action
      */
-    public CreateGameResult(String gameName, String gameID, String message) {}
+    public CreateGameResult(int gameID) {
+        this.gameID = gameID;
+    }
 
     public String getGameName() {
         return gameName;
     }
 
-    public String getGameID() {
+    public int getGameID() {
         return gameID;
     }
 
@@ -45,7 +50,7 @@ public class CreateGameResult {
         this.gameName = gameName;
     }
 
-    public void setGameID(String gameID) {
+    public void setGameID(int gameID) {
         this.gameID = gameID;
     }
 

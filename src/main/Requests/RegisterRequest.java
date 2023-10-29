@@ -21,11 +21,6 @@ public class RegisterRequest {
     private String email;
 
     /**
-     * authToken for request;
-     */
-    private Models.AuthToken authToken;
-
-    /**
      * Constructor for RegisterRequest
      *
      * @param username      user's username

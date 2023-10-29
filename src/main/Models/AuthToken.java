@@ -1,4 +1,5 @@
 package Models;
+import java.util.*;
 
 /**
  * An authtoken to be assigned to a player
@@ -10,17 +11,34 @@ public class AuthToken {
     /**
      * Constructor for authToken
      *
-     * @param token     new token
      * @param username  user's username
      */
-    public AuthToken(String token, String username) {}
+    public AuthToken(String username) {
+        GenerateToken();
+        this.username = username;
+    }
 
     /**
      * generates a token given a username
      *
-     * @param username   username to be given a token
      */
-    private void GenerateToken(String username) {}
+    private void GenerateToken() {
+        authToken = UUID.randomUUID().toString();
+    }
 
+    public String getAuthToken() {
+        return authToken;
+    }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setAuthToken(String authToken) {
+        this.authToken = authToken;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 }

@@ -1,5 +1,8 @@
 package Services;
 
+import DataAccess.AuthTokenDAO;
+import DataAccess.UserDAO;
+import Models.AuthToken;
 import Requests.LoginRequest;
 import Results.LoginResult;
 
@@ -15,5 +18,23 @@ public class LoginService {
      * @param request   LoginRequest
      * @return          Returns LoginResult
      */
-    public LoginResult login(LoginRequest request) {return null;}
+    public LoginResult login(LoginRequest request) {
+        try {
+
+            UserDAO userDAO = UserDAO.getInstance();
+            userDAO.getUser(request.getUsername(), request.getPassword());
+
+            AuthToken token = new AuthToken(request.getUsername());
+            AuthTokenDAO authTokenDAO = AuthTokenDAO.getInstance();
+            authTokenDAO.addAuthToken(token);
+
+            System.out.println("returning user");
+            return new LoginResult(token.getAuthToken(), request.getUsername());
+        } catch (Exception e) {
+            if(e.getMessage().equals("user not in database")) {
+                return new LoginResult("Error: unauthorized");
+            }
+            return new LoginResult("Error: internal server error");
+        }
+    }
 }

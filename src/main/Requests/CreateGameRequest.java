@@ -11,11 +11,6 @@ public class CreateGameRequest {
     private String gameName;
 
     /**
-     * authToken for request;
-     */
-    private Models.AuthToken authToken;
-
-    /**
      * Constructor for CreateGameRequest
      *
      * @param gameName  new game name

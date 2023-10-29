@@ -21,14 +21,19 @@ public class LoginResult {
      */
     private String username;
 
+    public LoginResult(String authToken, String username) {
+        this.authToken = authToken;
+        this.username = username;
+    }
+
     /**
      * Constructor for LoginResult
      *
      * @param message       message for action
-     * @param authToken     user's authtoken
-     * @param username      user's username
      */
-    public LoginResult(String message, String authToken, String username) {}
+    public LoginResult(String message) {
+        this.message = message;
+    }
 
     public String getMessage() {
         return message;

@@ -1,5 +1,8 @@
 package Services;
 
+import DataAccess.AuthTokenDAO;
+import DataAccess.UserDAO;
+import DataAccess.GameDAO;
 import Results.ClearAppResult;
 
 /**
@@ -12,5 +15,15 @@ public class ClearAppService {
      *
      * @return      Returns ClearAppResult
      */
-    public ClearAppResult ClearApp() {return null;}
+    public ClearAppResult ClearApp() {
+        AuthTokenDAO authTokenDAO = AuthTokenDAO.getInstance();
+        UserDAO userDAO = UserDAO.getInstance();
+        GameDAO gameDAO = GameDAO.getInstance();
+
+        authTokenDAO.clearAll();
+        userDAO.clearAll();
+        gameDAO.clearAll();
+
+        return new ClearAppResult();
+    }
 }

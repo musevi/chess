@@ -30,6 +30,8 @@ public class Game {
      */
     private chess.ChessGame game;
 
+    public Game() {}
+
     /**
      * Constructor for Game
      *

@@ -6,10 +6,7 @@ package Results;
 public class ClearAppResult {
     private String message;
 
-    /**
-     * Constructor for ClearAppResult
-     * @param message   result message
-     */
+    public ClearAppResult() {}
     public ClearAppResult(String message) {}
 
     public String getMessage() {

@@ -20,14 +20,41 @@ public class RegisterResult {
      */
     private String username;
 
+    public RegisterResult(String authToken, String username) {
+        this.authToken = authToken;
+        this.username = username;
+    }
+
     /**
      * Constructor for RegisterResult
      *
      * @param message       message for action
-     * @param authToken     user's authToken
-     * @param username      user's username
      */
-    public RegisterResult(String message, String authToken, String username) {}
+    public RegisterResult(String message) {
+        this.message = message;
+    }
 
+    public String getMessage() {
+        return message;
+    }
 
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public String getAuthToken() {
+        return authToken;
+    }
+
+    public void setAuthToken(String authToken) {
+        this.authToken = authToken;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 }
