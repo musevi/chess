@@ -20,14 +20,16 @@ public class JoinGameResult {
      */
     private String message;
 
+    public JoinGameResult() {}
+
     /**
      * Constructor for JoinGameResult
      *
-     * @param playerColor   WHITE or BLACK
-     * @param gameID        ID of game
      * @param message       message for action
      */
-    public JoinGameResult(String playerColor, String gameID, String message) {}
+    public JoinGameResult(String message) {
+        this.message = message;
+    }
 
     public String getPlayerColor() {
         return playerColor;

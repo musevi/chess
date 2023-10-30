@@ -15,7 +15,7 @@ public class ClearAppService {
      *
      * @return      Returns ClearAppResult
      */
-    public ClearAppResult ClearApp() {
+    public ClearAppResult clearApp() {
         AuthTokenDAO authTokenDAO = AuthTokenDAO.getInstance();
         UserDAO userDAO = UserDAO.getInstance();
         GameDAO gameDAO = GameDAO.getInstance();

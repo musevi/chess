@@ -13,7 +13,7 @@ public class JoinGameRequest {
     /**
      * game ID string
      */
-    private String gameID;
+    private Integer gameID;
 
     /**
      * Constructor for JoinGameRequest
@@ -21,13 +21,16 @@ public class JoinGameRequest {
      * @param playerColor   WHITE or BLACK
      * @param gameID        ID of game
      */
-    public JoinGameRequest(String playerColor, String gameID) {}
+    public JoinGameRequest(String playerColor, Integer gameID) {
+        this.playerColor = playerColor;
+        this.gameID = gameID;
+    }
 
     public String getPlayerColor() {
         return playerColor;
     }
 
-    public String getGameID() {
+    public Integer getGameID() {
         return gameID;
     }
 
@@ -35,7 +38,7 @@ public class JoinGameRequest {
         this.playerColor = playerColor;
     }
 
-    public void setGameID(String gameID) {
+    public void setGameID(int gameID) {
         this.gameID = gameID;
     }
 }

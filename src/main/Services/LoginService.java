@@ -31,6 +31,7 @@ public class LoginService {
             System.out.println("returning user");
             return new LoginResult(token.getAuthToken(), request.getUsername());
         } catch (Exception e) {
+            System.out.println(e);
             if(e.getMessage().equals("user not in database")) {
                 return new LoginResult("Error: unauthorized");
             }

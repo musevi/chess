@@ -1,9 +1,7 @@
 package Handlers;
 
 import Requests.CreateGameRequest;
-import Requests.LoginRequest;
 import Results.CreateGameResult;
-import Results.LoginResult;
 import Services.CreateGameService;
 import com.google.gson.Gson;
 import spark.Request;

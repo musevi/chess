@@ -24,7 +24,7 @@ public class CreateGameService {
             authTokenDAO.getAuthToken(authToken);
 
             GameDAO gameDAO = GameDAO.getInstance();
-            int gameID = gameDAO.Insert();
+            int gameID = gameDAO.Insert(request.getGameName());
 
             return new CreateGameResult(gameID);
         } catch(Exception e) {

@@ -10,7 +10,7 @@ public class ClearHandler extends BaseHandler {
     @Override
     public Object handle(Request request, Response response) throws Exception {
         ClearAppService clearAppService = new ClearAppService();
-        ClearAppResult result = clearAppService.ClearApp();
+        ClearAppResult result = clearAppService.clearApp();
         return new Gson().toJson(result);
     }
 }

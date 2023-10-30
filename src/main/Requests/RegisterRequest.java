@@ -27,7 +27,11 @@ public class RegisterRequest {
      * @param password      user's password
      * @param email         user's email
      */
-    public RegisterRequest(String username, String password, String email) {}
+    public RegisterRequest(String username, String password, String email) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+    }
 
     public String getUsername() {
         return username;
