@@ -11,6 +11,9 @@ public class ClearHandler extends BaseHandler {
     public Object handle(Request request, Response response) throws Exception {
         ClearAppService clearAppService = new ClearAppService();
         ClearAppResult result = clearAppService.clearApp();
+
+        if(result.getMessage() != null && result.getMessage().equals("Error: internal server error")) {response.status(500);}
+
         return new Gson().toJson(result);
     }
 }

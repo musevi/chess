@@ -16,14 +16,18 @@ public class ClearAppService {
      * @return      Returns ClearAppResult
      */
     public ClearAppResult clearApp() {
-        AuthTokenDAO authTokenDAO = AuthTokenDAO.getInstance();
-        UserDAO userDAO = UserDAO.getInstance();
-        GameDAO gameDAO = GameDAO.getInstance();
+        try {
+            AuthTokenDAO authTokenDAO = AuthTokenDAO.getInstance();
+            UserDAO userDAO = UserDAO.getInstance();
+            GameDAO gameDAO = GameDAO.getInstance();
 
-        authTokenDAO.clearAll();
-        userDAO.clearAll();
-        gameDAO.clearAll();
+            authTokenDAO.clearAll();
+            userDAO.clearAll();
+            gameDAO.clear();
 
-        return new ClearAppResult();
+            return new ClearAppResult();
+        } catch(Exception e) {
+            return new ClearAppResult("Error: internal server error");
+        }
     }
 }

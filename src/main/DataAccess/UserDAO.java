@@ -71,16 +71,6 @@ public class UserDAO {
      */
     public void deleteUser(User u) throws DataAccessException {}
 
-    public int getSize() {
-        return users.size();
-    }
-
-    public void printAll() {
-        for(String s : users.keySet()) {
-            System.out.println(users.get(s).getUsername() + "\n" + users.get(s).getPassword() + "\n");
-        }
-    }
-
     public void clearAll() {
         users.clear();
     }

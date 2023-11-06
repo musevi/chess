@@ -7,7 +7,9 @@ public class ClearAppResult {
     private String message;
 
     public ClearAppResult() {}
-    public ClearAppResult(String message) {}
+    public ClearAppResult(String message) {
+        this.message = message;
+    }
 
     public String getMessage() {
         return message;

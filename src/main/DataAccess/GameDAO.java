@@ -104,7 +104,7 @@ public class GameDAO {
      * A method for clearing all data from the database
      * @throws DataAccessException  exception thrown
      */
-    public void clear() throws DataAccessException {}
+    public void clear() throws DataAccessException {games.clear();}
 
     public boolean gameExists(int gameID) {
         if(games.containsKey(gameID)) {
@@ -112,9 +112,4 @@ public class GameDAO {
         }
         return false;
     }
-
-    public void clearAll() {
-        games.clear();
-    }
-
 }
