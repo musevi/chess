@@ -37,6 +37,7 @@ public class RegisterService {
             return new RegisterResult(token.getAuthToken(), request.getUsername());
 
         } catch(Exception e) {
+            System.out.println(e.toString());
             if(e.getMessage().equals("user already exists")) {
                 return new RegisterResult("Error: already taken");
             } else if (e.getMessage().equals("bad request")) {

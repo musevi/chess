@@ -15,7 +15,9 @@ public class CreateGameRequest {
      *
      * @param gameName  new game name
      */
-    public CreateGameRequest(String gameName) {}
+    public CreateGameRequest(String gameName) {
+        this.gameName = gameName;
+    }
 
     public String getGameName() {
         return gameName;

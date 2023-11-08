@@ -24,6 +24,7 @@ public class LogoutService {
 
             return new LogoutResult();
         } catch(Exception e) {
+            System.out.println(e.toString());
             if(e.getMessage().equals("token not found")) {
                 return new LogoutResult("Error: unauthorized");
             }

@@ -28,6 +28,7 @@ public class CreateGameService {
 
             return new CreateGameResult(gameID);
         } catch(Exception e) {
+            System.out.println(e.toString());
             if(e.getMessage().equals("token not found")) {
                 return new CreateGameResult("Error: unauthorized");
             }

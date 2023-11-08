@@ -39,6 +39,7 @@ public class JoinGameService {
 
             return new JoinGameResult();
         } catch(Exception e) {
+            System.out.println(e.toString());
             if(e.getMessage().equals("token not found")) {
                 return new JoinGameResult("Error: unauthorized");
             }

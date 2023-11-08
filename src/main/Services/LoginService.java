@@ -28,7 +28,6 @@ public class LoginService {
             AuthTokenDAO authTokenDAO = AuthTokenDAO.getInstance();
             authTokenDAO.addAuthToken(token);
 
-            System.out.println("returning user");
             return new LoginResult(token.getAuthToken(), request.getUsername());
         } catch (Exception e) {
             System.out.println(e);

@@ -8,6 +8,11 @@ public class AuthToken {
     private String authToken;
     private String username;
 
+    public AuthToken(String authToken, String username) {
+        this.authToken = authToken;
+        this.username = username;
+    }
+
     /**
      * Constructor for authToken
      *

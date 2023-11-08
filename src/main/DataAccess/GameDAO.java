@@ -1,24 +1,27 @@
 package DataAccess;
+import Models.AuthToken;
 import Models.Game;
-import Models.User;
-import chess.ChessGame;
+import chess.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import static java.sql.Statement.RETURN_GENERATED_KEYS;
 
 /**
  * DAO for Game
  */
 public class GameDAO {
-
-    private static HashMap<Integer, Game> games;
-    private int count;
+    private Database database = new Database();
     private static GameDAO single_instance = null;
-    private GameDAO() {
-        games = new HashMap<>();
-        count = 0;
-    }
+    private GameDAO() {}
     public static synchronized GameDAO getInstance() {
         if(single_instance == null) {
             single_instance = new GameDAO();
@@ -32,12 +35,30 @@ public class GameDAO {
      * @throws DataAccessException  exception thrown
      */
     public int Insert(String gameName) throws DataAccessException {
-        Game newGame = new Game();
-        count++;
-        newGame.setGameID(count);
-        newGame.setGameName(gameName);
-        games.put(count, newGame);
-        return count;
+        Connection conn = database.getConnection();
+        try(var preparedStatement = conn.prepareStatement("INSERT INTO Games (gameName, game, whiteUsername, blackUsername) VALUES(?, ?, ?, ?)", RETURN_GENERATED_KEYS)) {
+            preparedStatement.setString(1, gameName);
+
+            ChessGame chessGame = new ChessGameImpl();
+            var json = new Gson().toJson(chessGame);
+            preparedStatement.setString(2, json);
+
+            preparedStatement.setString(3, null);
+            preparedStatement.setString(4, null);
+
+            preparedStatement.executeUpdate();
+
+            var resultSet = preparedStatement.getGeneratedKeys();
+            var ID = 0;
+            if (resultSet.next()) {
+                ID = resultSet.getInt(1);
+            }
+            return ID;
+        } catch (SQLException x) {
+            throw new DataAccessException(x.toString());
+        } finally {
+            database.closeConnection(conn);
+        }
     }
 
     /**
@@ -48,7 +69,31 @@ public class GameDAO {
      * @throws DataAccessException  exception thrown
      */
     public Game find (int gameID) throws DataAccessException {
-        return games.get(gameID);
+        Connection conn = database.getConnection();
+        try (var preparedStatement = conn.prepareStatement("SELECT * FROM Games WHERE id=?")) {
+            preparedStatement.setInt(1, gameID);
+            var rs = preparedStatement.executeQuery();
+            rs.next();
+            String white = rs.getString("whiteUsername");
+            String black = rs.getString("blackUsername");
+            String name = rs.getString("gameName");
+
+            var json = rs.getString("game");
+            var builder = new GsonBuilder();
+            builder.registerTypeAdapter(ChessGame.class, new ChessGameAdapter());
+            builder.registerTypeAdapter(ChessBoard.class, new ChessBoardAdapter());
+            builder.registerTypeAdapter(ChessPiece.class, new ChessPieceAdapter());
+
+            var chessGame = builder.create().fromJson(json, ChessGameImpl.class);
+
+            Game game = new Game(gameID, name, white, black, chessGame);
+
+            return game;
+        } catch (SQLException x) {
+            throw new DataAccessException(x.toString());
+        } finally {
+            database.closeConnection(conn);
+        }
     }
 
     /**
@@ -58,11 +103,34 @@ public class GameDAO {
      * @throws DataAccessException  exception thrown
      */
     public List<Game> findAll() throws DataAccessException {
-        List<Game> gameList = new ArrayList<>();
-        for (HashMap.Entry<Integer, Game> mapElement : games.entrySet()) {
-            gameList.add(mapElement.getValue());
+        Connection conn = database.getConnection();
+        try (var preparedStatement = conn.prepareStatement("SELECT * FROM Games")) {
+            var rs = preparedStatement.executeQuery();
+            List<Game> gameList = new ArrayList<>();
+            while(rs.next()) {
+                int gameID = rs.getInt("id");
+                String white = rs.getString("whiteUsername");
+                String black = rs.getString("blackUsername");
+                String name = rs.getString("gameName");
+
+                var json = rs.getString("game");
+                var builder = new GsonBuilder();
+                builder.registerTypeAdapter(ChessGame.class, new ChessGameAdapter());
+                builder.registerTypeAdapter(ChessBoard.class, new ChessBoardAdapter());
+                builder.registerTypeAdapter(ChessPiece.class, new ChessPieceAdapter());
+
+                var chessGame = builder.create().fromJson(json, ChessGameImpl.class);
+
+                Game game = new Game(gameID, name, white, black, chessGame);
+                gameList.add(game);
+            }
+
+            return gameList;
+        } catch (SQLException x) {
+            throw new DataAccessException(x.toString());
+        } finally {
+            database.closeConnection(conn);
         }
-        return gameList;
     }
 
     /**
@@ -72,16 +140,36 @@ public class GameDAO {
      * @throws DataAccessException  exception thrown
      */
     public void claimSpot(String username, Game game, String color) throws DataAccessException {
-        if(color == null) {
-            game.addObserver(username);
-        } else if(color.equals("WHITE")) {
-            if(game.getWhiteUsername() != null) {throw new DataAccessException("already taken");}
-            game.setWhiteUsername(username);
-        } else if(color.equals("BLACK")) {
-            if (game.getBlackUsername() != null) {throw new DataAccessException("already taken");}
-            game.setBlackUsername(username);
-        } else {
-            game.addObserver(username);
+        if (color == null) {
+            //game.addObserver(username);
+        } else if (color.equals("WHITE")) {
+            if (game.getWhiteUsername() != null) {
+                throw new DataAccessException("already taken");
+            }
+            Connection conn = database.getConnection();
+            try(var preparedStatement = conn.prepareStatement("UPDATE Games SET whiteUsername=? WHERE id=?")) {
+                preparedStatement.setString(1, username);
+                preparedStatement.setInt(2, game.getGameID());
+                preparedStatement.executeUpdate();
+            } catch (SQLException x) {
+                throw new DataAccessException(x.toString());
+            } finally {
+                database.closeConnection(conn);
+            }
+        } else if (color.equals("BLACK")) {
+            if (game.getBlackUsername() != null) {
+                throw new DataAccessException("already taken");
+            }
+            Connection conn = database.getConnection();
+            try(var preparedStatement = conn.prepareStatement("UPDATE Games SET blackUsername=? WHERE id=?")) {
+                preparedStatement.setString(1, username);
+                preparedStatement.setInt(2, game.getGameID());
+                preparedStatement.executeUpdate();
+            } catch (SQLException x) {
+                throw new DataAccessException(x.toString());
+            } finally {
+                database.closeConnection(conn);
+            }
         }
     }
 
@@ -104,12 +192,31 @@ public class GameDAO {
      * A method for clearing all data from the database
      * @throws DataAccessException  exception thrown
      */
-    public void clear() throws DataAccessException {games.clear();}
-
-    public boolean gameExists(int gameID) {
-        if(games.containsKey(gameID)) {
-            return true;
+    public void clear() throws DataAccessException {
+        Connection conn = database.getConnection();
+        try(var preparedStatement = conn.prepareStatement("DELETE FROM Games")) {
+            preparedStatement.executeUpdate();
+        } catch (SQLException x) {
+            throw new DataAccessException(x.toString());
+        } finally {
+            database.closeConnection(conn);
         }
-        return false;
+    }
+
+    public boolean gameExists(int gameID) throws DataAccessException {
+        Connection conn = database.getConnection();
+        try(var preparedStatement = conn.prepareStatement("SELECT * FROM Games WHERE id=?")) {
+            preparedStatement.setInt(1, gameID);
+            var rs = preparedStatement.executeQuery();
+            if(rs.next()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException x) {
+            throw new DataAccessException(x.toString());
+        } finally {
+            database.closeConnection(conn);
+        }
     }
 }

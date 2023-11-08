@@ -28,6 +28,7 @@ public class ListGamesService {
 
             return new ListGamesResult(games);
         } catch(Exception e) {
+            System.out.println(e.toString());
             if(e.getMessage().equals("token not found")) {
                 return new ListGamesResult("Error: unauthorized");
             }

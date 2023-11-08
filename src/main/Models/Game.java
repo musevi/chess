@@ -1,6 +1,7 @@
 package Models;
 
 import chess.ChessGame;
+import chess.ChessGameImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,12 +48,15 @@ public class Game {
     /**
      * Constructor for Game
      *
-     * @param whiteUsername     username for first player
-     * @param blackUsername     username for second player
      * @param gameName          name of game
-     * @param game              game to be played
      */
-    public Game(String whiteUsername, String blackUsername, String gameName, chess.ChessGame game) {}
+    public Game(int id, String gameName, String whiteUsername, String blackUsername, ChessGame game) {
+        this.gameID = id;
+        this.gameName = gameName;
+        this.game = game;
+        this.whiteUsername = whiteUsername;
+        this.blackUsername = blackUsername;
+    }
 
     public int getGameID() {
         return gameID;
@@ -95,7 +99,6 @@ public class Game {
     }
 
     public void addObserver(String observerName) {
-        System.out.println("adding observer");
         observers.add(observerName);
     }
 }
