@@ -5,7 +5,6 @@ import DataAccess.UserDAO;
 import Models.AuthToken;
 import Models.User;
 import Requests.RegisterRequest;
-import Results.LoginResult;
 import Results.RegisterResult;
 
 /**

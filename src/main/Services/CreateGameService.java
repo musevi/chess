@@ -26,7 +26,7 @@ public class CreateGameService {
             GameDAO gameDAO = GameDAO.getInstance();
             int gameID = gameDAO.Insert(request.getGameName());
 
-            return new CreateGameResult(gameID);
+            return new CreateGameResult(gameID, request.getGameName());
         } catch(Exception e) {
             System.out.println(e.toString());
             if(e.getMessage().equals("token not found")) {

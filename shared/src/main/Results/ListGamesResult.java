@@ -36,4 +36,8 @@ public class ListGamesResult {
     public void setMessage(String message) {
         this.message = message;
     }
+
+    public List<Game> getGames() {
+        return games;
+    }
 }

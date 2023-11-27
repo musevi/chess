@@ -29,9 +29,11 @@ public class CreateGameResult {
      * Constructor for CreateGameResult
      *
      * @param gameID    new game ID
+     * @param gameName  new game name
      */
-    public CreateGameResult(int gameID) {
+    public CreateGameResult(int gameID, String gameName) {
         this.gameID = gameID;
+        this.gameName = gameName;
     }
 
     public String getGameName() {

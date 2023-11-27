@@ -1,5 +1,7 @@
 package DataAccess;
-import Models.AuthToken;
+import Models.ChessBoardAdapter;
+import Models.ChessGameAdapter;
+import Models.ChessPieceAdapter;
 import Models.Game;
 import chess.*;
 import com.google.gson.Gson;
@@ -8,9 +10,7 @@ import com.google.gson.GsonBuilder;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import static java.sql.Statement.RETURN_GENERATED_KEYS;
@@ -140,9 +140,10 @@ public class GameDAO {
      * @throws DataAccessException  exception thrown
      */
     public void claimSpot(String username, Game game, String color) throws DataAccessException {
+        //color = color.toLowerCase();
         if (color == null) {
             //game.addObserver(username);
-        } else if (color.equals("WHITE")) {
+        } else if (color.equals("white")) {
             if (game.getWhiteUsername() != null) {
                 throw new DataAccessException("already taken");
             }
@@ -156,7 +157,7 @@ public class GameDAO {
             } finally {
                 database.closeConnection(conn);
             }
-        } else if (color.equals("BLACK")) {
+        } else if (color.equals("black")) {
             if (game.getBlackUsername() != null) {
                 throw new DataAccessException("already taken");
             }

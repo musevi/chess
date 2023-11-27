@@ -2,7 +2,6 @@ package Services;
 
 import DataAccess.AuthTokenDAO;
 import DataAccess.GameDAO;
-import Results.JoinGameResult;
 import Results.ListGamesResult;
 import Models.Game;
 

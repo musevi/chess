@@ -1,7 +1,5 @@
 package Services;
 
-import Models.AuthToken;
-import Results.LoginResult;
 import Results.LogoutResult;
 import DataAccess.AuthTokenDAO;
 

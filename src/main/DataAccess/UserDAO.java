@@ -1,11 +1,9 @@
 package DataAccess;
 
-import Models.AuthToken;
 import Models.User;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.HashMap;
 
 /**
  * User DAO

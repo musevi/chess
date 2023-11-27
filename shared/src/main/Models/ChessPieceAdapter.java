@@ -1,4 +1,4 @@
-package DataAccess;
+package Models;
 
 import chess.ChessPiece;
 import chess.ChessPieceImpl;

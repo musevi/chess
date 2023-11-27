@@ -1,7 +1,5 @@
 package chess;
 
-import java.util.Arrays;
-
 public class ChessBoardImpl implements ChessBoard {
 
     private ChessPiece[][] chessBoard = new ChessPiece[8][8];

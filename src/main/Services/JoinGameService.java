@@ -2,12 +2,9 @@ package Services;
 
 import DataAccess.AuthTokenDAO;
 import DataAccess.GameDAO;
-import DataAccess.UserDAO;
 import Models.Game;
 import Requests.JoinGameRequest;
-import Results.CreateGameResult;
 import Results.JoinGameResult;
-import chess.ChessGame;
 
 /**
  * Service for JoinGame, which verifies the game exists and adds caller as player or spectator
